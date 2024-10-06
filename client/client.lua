@@ -17,8 +17,8 @@ Citizen.CreateThread(function()
     loadPedModel(pedModel)
     for key, value in pairs(Config.Business) do
         local pnjCoords = value.npc.pos
-        local ped = CreatePed(4, pedModel, pnjCoords.x, pnjCoords.y, pnjCoords.z - 1.0, value.npc.heading, false, true)
-        SetEntityHeading(ped, 90.0) -- Orienter le PNJ
+        local ped = CreatePed(4, pedModel, pnjCoords.x, pnjCoords.y, pnjCoords.z - 1.0, 1.0, false, true)
+        SetEntityHeading(ped, value.npc.heading) -- Orienter le PNJ
         FreezeEntityPosition(ped, true)
         SetEntityInvincible(ped, true)
         SetBlockingOfNonTemporaryEvents(ped, true)
@@ -76,7 +76,7 @@ AddEventHandler('gm-delivery:requestOrder', function()
         print('requestOrder min '..minPerDelivery)
         -- Boucle pour s'assurer que le total amount est dans les limites
         while (totalAmount <= minPerDelivery) do
-                
+
             -- Parcourir les items
             for itemKey, itemValue in pairs(cfg.items) do
                 local amount = math.random(0, 2) -- Générer un nombre aléatoire entre 0 et 2

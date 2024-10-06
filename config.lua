@@ -4,7 +4,7 @@ Config.Business = {
     ["hogspub"]={
         npc = {
             pos = vec3(-582.46, -295.08, 35.09),
-            heading = 291.31,
+            heading = 198.64,
         },
         items = {
             ['ngd_standardcigpack'] = {price=60},
