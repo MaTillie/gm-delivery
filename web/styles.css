@@ -1,0 +1,63 @@
+body {
+    background-color: transparent;
+    color: #FEEAA1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Merriweather Sans", sans-serif;
+}
+
+#ticket{
+    display : none;
+}
+.notepad {
+    width: 300px;
+    background-color: #012218;
+    /*border: 2px solid #000;*/
+    border-radius: 10 px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+}
+
+.notepad h1 {
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ffffff;
+    padding-bottom: 10px;
+}
+
+.notepad ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: left;
+}
+
+.notepad ul li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: #690101;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+.close-button:hover {
+    background-color: #9e0f0f;
+}
