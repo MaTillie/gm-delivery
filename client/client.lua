@@ -32,7 +32,7 @@ Citizen.CreateThread(function()
                 label = 'Prendre une commande',
                 groups = key,
                 canInteract = function(entity, distance, coords)
-                    return not currentOrder -- Seulement si aucune commande n'est en cours
+                    return not currentOrder
                 end
                 
             },
@@ -43,7 +43,7 @@ Citizen.CreateThread(function()
                 label = 'Valider la commande',
                 groups = key,
                 canInteract = function(entity, distance, coords)
-                    return (currentOrder and not currentDelivery) -- Si le joueur a tous les items nécessaires
+                    return (currentOrder and not currentDelivery)
                 end
             }
         })
@@ -77,28 +77,25 @@ AddEventHandler('gm-delivery:requestOrder', function()
         -- Boucle pour s'assurer que le total amount est dans les limites
         while (totalAmount <= minPerDelivery) do
 
-            -- Parcourir les items
+
             for itemKey, itemValue in pairs(cfg.items) do
-                local amount = math.random(0, 2) -- Générer un nombre aléatoire entre 0 et 2
+                local amount = math.random(0, 2)
                 
                 if amount > 0 then
-                    -- Si l'item existe déjà dans result, on met à jour sa quantité
+
                     if order[itemKey] then
                         order[itemKey] = order[itemKey] + amount
                     else
                         order[itemKey] = amount
                     end
                 end
-    
-                -- Ajouter la quantité à totalAmount
+
                 totalAmount = totalAmount + amount
             end
         end 
     
         currentOrder = order
         TriggerServerEvent('gm-delivery:server:delivery_order', currentOrder)
-        
-        --TriggerServerEvent('gm-delivery:server:createOrder',order)   
         
         TriggerEvent('ox_lib:notify', {type = 'success', description = 'Vous avez reçu une commande.'})
     end

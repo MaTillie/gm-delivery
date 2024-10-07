@@ -30,8 +30,7 @@ AddEventHandler('gm-delivery:server:rewardPlayer', function(metadata)
     player.Functions.AddMoney('cash', totalAmount)
     local tenPercent = totalAmount * 0.10
     local roundedTenPercent = math.floor(tenPercent + 0.5)
-    
-    exports.fdsdev_bossmenu.addMoney(nil, 'playerData.job.name', roundedTenPercent, "Livraison", "livraison")
+    exports.fdsdev_bossmenu.addMoney(nil, player.PlayerData.job.name, roundedTenPercent, "Livraison", "Livraison de "..player.PlayerData.charinfo.firstname.." "..player.PlayerData.charinfo.lastname )
    -- xPlayer.Functions.AddExperience('delivery', itemCount * 10) -- Exemple de gain d'expérience
 end)
 
