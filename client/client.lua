@@ -93,7 +93,8 @@ AddEventHandler('gm-delivery:requestOrder', function()
                 totalAmount = totalAmount + amount
             end
         end 
-    
+        order["tip"] = 0
+
         currentOrder = order
         TriggerServerEvent('gm-delivery:server:delivery_order', currentOrder)
         
@@ -141,11 +142,35 @@ end)
 
 RegisterNetEvent('gm-delivery:client:completeDelivery')
 AddEventHandler('gm-delivery:client:completeDelivery', function()
-    TriggerServerEvent('gm-delivery:server:rewardPlayer',currentOrder)
-    RemoveBlip(currentDelivery.blip)
-    currentDelivery = nil
-    currentOrder = nil
+    local playerData = QBCore.Functions.GetPlayerData()
+    local cfg = Config.Business[playerData.job.name]
+    local flg = true
+
+    if(not order["tip"] == 0) then
+        flg = true
+    elseif(math.random(0, 100) >= 95) then
+        flg = false
+        -- Il y en a une partie pour une personne qui m'accompagnait, elle a du s'en aller, pouvez vous lui livrer ? Y / N
+        local accept = true
+
+        if(accept) then
+            order["tip"] = cfg.positiveTips
+            TriggerEvent('gm-delivery:client:goDelivery')
+        else
+            order["tip"] = cfg.negativeTips
+            flg = true
+        end
+    end
+
+    if(flg) then
+        TriggerServerEvent('gm-delivery:server:rewardPlayer', currentOrder)
+        RemoveBlip(currentDelivery.blip)
+        currentDelivery = nil
+        currentOrder = nil
+    end
+
 end)
+
 
 -- Vérification pour la validation de la livraison à destination
 Citizen.CreateThread(function()

@@ -21,7 +21,7 @@ RegisterNetEvent('gm-delivery:server:rewardPlayer')
 AddEventHandler('gm-delivery:server:rewardPlayer', function(metadata)
     local src = source
     local player = exports.qbx_core:GetPlayer(src)
-    local totalAmount = Config.Business[player.PlayerData.job.name].additionalDeliveryReward
+    local totalAmount = math.random(Config.Business[player.PlayerData.job.name].additionalDeliveryReward.min, Config.Business[player.PlayerData.job.name].additionalDeliveryReward.max)
     
     for item, amount in pairs(metadata) do  
         totalAmount = totalAmount + (Config.Business[player.PlayerData.job.name].items[item].price * amount)

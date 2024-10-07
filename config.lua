@@ -12,7 +12,9 @@ Config.Business = {
         },
         minPerDelivery = 4,
         maxPerDelivery = 11,
-        additionalDeliveryReward = 75,        
+        additionalDeliveryReward = {min=50,max=100},
+        negativeTips = -20, -- When player refuse additional event
+        positiveTips = 60 -- When player done additional delivery
     },
 }
 
